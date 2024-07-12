@@ -10,6 +10,14 @@ var connectionStringBuilder = new SqliteConnectionStringBuilder { DataSource = "
 var connectionString = connectionStringBuilder.ToString();
 var connection = new SqliteConnection(connectionString);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowsAnyOrigin", builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+    });
+});
+
 connection.Open();
 
 // Cria a tabela de produtos, se não existir

@@ -39,10 +39,29 @@ namespace product_management.DAL
 
         public async Task<bool> UpdateProduct(int id, ProductUpdateDTO product)
         {
-            string query = @$"
-                UPDATE Products
-                SET Name = @Name, Price = @Price, Description = @Description
-                WHERE Id = {id};";
+            var updateFields = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(product.Name))
+            {
+                updateFields.Add($"Name = @Name");
+            }
+
+            if (product.Price > 0)
+            {
+                updateFields.Add($"Price = @Price");
+            }
+
+            if (!string.IsNullOrWhiteSpace(product.Description))
+            {
+                updateFields.Add($"Description = @Description");
+            }
+
+            string setClause = string.Join(", ", updateFields);
+
+            string query = $@"
+                    UPDATE Products
+                    SET {setClause}
+                    WHERE Id = {id};";
 
             var rowsAffected = await _dbConnection.ExecuteAsync(query, product);
             return rowsAffected > 0;

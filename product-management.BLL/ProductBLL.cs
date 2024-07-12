@@ -35,10 +35,10 @@ namespace product_management.BLL
 
         public async Task<bool> UpdateProduct(int id, ProductUpdateDTO product)
         {
-            if (string.IsNullOrWhiteSpace(product.Name))
+            if (product.Name == "")
                 throw new ArgumentException("Nome do produto é obrigatório.");
 
-            if (product.Price <= 0)
+            if (product.Price != null && product.Price <= 0)
                 throw new ArgumentException("Preço do produto deve ser maior que zero.");
 
             return await _productDAL.UpdateProduct(id, product);

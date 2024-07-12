@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>product_management.BLL</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\product-management.DAL\product-management.DAL.csproj" />
+    <ProjectReference Include="..\product-management.DTO\product-management.DTO.csproj" />
+  </ItemGroup>
+
+</Project>
